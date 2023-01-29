@@ -14,6 +14,9 @@ const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
 
 const searchCountry = event => {
+  if (searchInput.value.trim() === '') {
+    return;
+  }
   const search = searchInput.value.trim();
 
   fetchCountries(search)
@@ -23,6 +26,7 @@ const searchCountry = event => {
     .catch(error => {
       if (search !== '') {
         Notiflix.Notify.failure('Oops, there is no country with that name');
+        document.querySelector('.country-list').innerHTML = '';
       }
     });
   event.preventDefault();
@@ -66,9 +70,7 @@ function countriesData(data) {
                         <h3>${item.name}</h3>
                     </div>
                     <div class = 'country-body'>
-                        
-                            
-                            <p><b>Region: </b> ${item.region}</p>
+                                             
                             <p><b>Capital: </b> ${item.capital}</p>
                             <p><b>Population: </b> ${item.population.toLocaleString()}</p>
                             <p><b>Languages: </b> ${item.languages[0].name}</p>
