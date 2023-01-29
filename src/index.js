@@ -27,6 +27,7 @@ const searchCountry = event => {
       if (search !== '') {
         Notiflix.Notify.failure('Oops, there is no country with that name');
         document.querySelector('.country-list').innerHTML = '';
+        document.querySelector('.country-info').innerHTML = '';
       }
     });
   event.preventDefault();
