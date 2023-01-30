@@ -38,9 +38,7 @@ function countriesData(data) {
     clearData(countryList);
     clearData(countryInfo);
 
-    Notiflix.Notify.info(
-      'Too many matches found. Please enter a more specific name.'
-    );
+    Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
   } else if (data.length > 1 && data.length <= 10) {
     clearData(countryList);
     clearData(countryInfo);
@@ -61,6 +59,10 @@ function countriesData(data) {
     clearData(countryList);
     clearData(countryInfo);
 
+    function takeAllLangs() {
+      return data[0].languages.map(lang => lang.name).join(', ');
+    }
+
     return (countryInfo.innerHTML = data
       .map(
         item => `
@@ -74,7 +76,7 @@ function countriesData(data) {
                                              
                             <p><b>Capital: </b> ${item.capital}</p>
                             <p><b>Population: </b> ${item.population.toLocaleString()}</p>
-                            <p><b>Languages: </b> ${item.languages[0].name}</p>
+                            <p><b>Languages: </b> ${takeAllLangs()}</p>
                         </div>
     
                     </div>
@@ -91,9 +93,6 @@ function clearData(output) {
   output.innerHTML = '';
 }
 
-searchInput.insertAdjacentHTML(
-  'beforebegin',
-  '<header><h1>Country Finder</h1></header>'
-);
+searchInput.insertAdjacentHTML('beforebegin', '<header><h1>Country Finder</h1></header>');
 
 searchInput.placeholder = 'Search for any country...';
